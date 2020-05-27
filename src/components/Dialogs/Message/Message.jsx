@@ -5,7 +5,7 @@ const Message = (props) => {
   return (
     <div className={s.message}>
       {props.message}
-      <div className={s.ava}></div>
+      <div className={s.ava} />
     </div>
   )
 }

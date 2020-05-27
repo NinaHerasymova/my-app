@@ -11,15 +11,15 @@ import News from './components/News/News';
 
 
 const App = (props) => {
-  return (    
+  return (
       <div className='app-wrapper'>
         <Header />
         <Navbar />
         <div className='app-wrapper-content'>
           <Route path='/profile'
-            render={() => <Profile profilePage={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>} />
+            render={() => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch}/>} />
           <Route path='/dialogs'
-            render={() => <Dialogs messagesPage={props.state.messagesPage} />} />
+            render={() => <Dialogs store={props.store} />} />
           <Route path='/music' component={Music} />
           <Route path='/news' component={News} />
         </div>
