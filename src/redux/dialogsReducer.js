@@ -10,10 +10,7 @@ let initialState = {
   ],
   messages: [
     {id: 1, message: 'Hello'},
-    {
-      id: 2,
-      message: 'How are you?There were a lot of fine things happened here without you!!!! How is your education? What about another things?????????'
-    },
+    {id: 2, message: 'There were a lot of fine things happened here without you!!!!'},
     {id: 3, message: 'Merhaba'},
     {id: 4, message: 'Nice to meet you)))'},
     {id: 5, message: 'So cute'}
@@ -24,14 +21,20 @@ let initialState = {
 export const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_NEW_MESSAGE_BODY:
-      state.newMessageBody = action.body;
-      return state;
-    case SEND_MESSAGE:
+      return {
+        ...state,
+        newMessageBody: action.body
+      };
+    case SEND_MESSAGE: {
       let body = state.newMessageBody;
-      state.newMessageBody = '';
-      state.messages.push({id: 6, message: body});
+      return {
+        ...state,
+        newMessageBody: '',
+        messages: [...state.messages, {id: 6, message: body}]
+      }
+    }
+    default:
       return state;
-    default:return state;
   }
 }
 
