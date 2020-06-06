@@ -1,14 +1,24 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
+import Preloader from "../../common/Preloader";
 
 const ProfileInfo = (props) => {
+
+  if (!props.profile) {
+    return <Preloader/>
+  }
+
   return (
     <div>
       <div className={s.wallpaper}>
         <img alt='wallpaper' src='https://www.w3schools.com/w3css/img_lights.jpg'/>
       </div>
       <div className={s.descriptionBlock}>
-        <img alt='avatar' src='https://yt3.ggpht.com/a/AGF-l7_CAKbMT2_4_eXS_J5IXUHdOMFuxBIIIhTruA=s900-c-k-c0xffffffff-no-rj-mo'/>
+        <img alt='avatar' src={props.profile.photos.large}/>
+        <div className={s.personInform}>
+          <span className={s.fullName}>{props.profile.fullName}</span>
+          <p className={s.status}>{props.profile.aboutMe}</p>
+        </div>
       </div>
     </div>
   )

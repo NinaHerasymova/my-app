@@ -1,11 +1,27 @@
 .descriptionBlock{
   padding: 10px;
+  display: flex;
 }
 .descriptionBlock img{
-  width: 80px;
-  height: 80px;
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  border: 3px solid #FD8469;
 }
 .wallpaper img{
   width: 100%;
   height: 200px;
+
 }
+.fullName{
+  font-size: 30px;
+  font-weight: bold;
+}
+.personInform{
+  padding: 15px;
+}
+.status{
+  font-style: italic;
+  color: grey;
+}
+

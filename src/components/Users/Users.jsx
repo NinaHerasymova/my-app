@@ -1,21 +1,35 @@
 import React from "react";
 import s from './Users.module.css';
-import * as axios from "axios";
-import userPhoto from '../../assets/images/user.png'
+
+import userPhoto from "../../assets/images/user.png"
+import {NavLink} from "react-router-dom";
+
 let Users = (props) => {
 
-  if (props.users.length === 0) {
+  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+  let pages = [];
 
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-      props.setUsers(response.data.items)
-    })
-
-
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
   }
+
   return (<div>
+    <div>
+      {pages.map(p => {
+        return <span className={props.currentPage === p ? s.selectedPage : s.page} onClick={(e) => {
+          props.onPageChanged(p)
+        }}>{p}</span>
+      })}
+    </div>
     {props.users.map(u => <div key={u.id}>
       <span>
-        <div><img src={u.photos.small!==null ? u.photos.small : userPhoto} className={s.userPhoto} alt="avatar"/></div>
+        <div>
+          <NavLink to={'./profile/'+u.id}>
+          <img src={u.photos.small !== null ? u.photos.small : userPhoto} className={s.userPhoto}
+               alt="avatar"/>
+          </NavLink>
+          </div>
+
         <div>
           {u.isFollowed
             ? <button onClick={() => {
