@@ -4,7 +4,6 @@ import {NavLink} from "react-router-dom";
 import userPhoto from "../../assets/images/user.png";
 
 const Header = (props) => {
-  console.log(props)
     return (
         <header className={s.header}>
             <img alt='logo' src='https://www.freelogodesign.org/Content/img/logo-samples/bobbygrill.png' />
