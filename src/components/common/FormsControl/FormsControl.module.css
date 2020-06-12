@@ -1,0 +1,19 @@
+.formControl textarea,
+.formControl input{
+    resize: none;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+.formControl textarea:focus,
+.formControl input:focus{
+    outline: none;
+}
+.error span {
+    color: orangered;
+}
+
+.error input,
+.error textarea {
+    border: 2px solid fuchsia;
+}

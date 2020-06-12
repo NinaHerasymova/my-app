@@ -6,9 +6,11 @@ import userPhoto from "../../assets/images/user.png";
 const Header = (props) => {
     return (
         <header className={s.header}>
-            <img alt='logo' src='https://www.freelogodesign.org/Content/img/logo-samples/bobbygrill.png' />
-            <div className={s.loginBlock}>
-              {props.isAuth ? <div className={s.authTitle}><img alt="ava" src={props.photo!== null?props.photo:userPhoto }/>{props.login}</div> :  <NavLink to={'/login'}>Login</NavLink>}
+            <img alt='logo' src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Gion_Mamori.svg/1200px-Gion_Mamori.svg.png' />
+            <div className={s.loginBlock}>{props.isAuth
+              ? <div className={s.authTitle}><img alt="ava" src={props.photo!== null?props.photo:userPhoto }/>{props.login}
+                <button className={s.logoutButton} onClick = {props.logOut}>Log out</button></div>
+              : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>
     )

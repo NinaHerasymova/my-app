@@ -1,6 +1,7 @@
 .header {
     grid-area: header;
     background-color: #05B565;
+    padding: 10px;
 }
 
 .header img {
@@ -13,10 +14,10 @@
     float: right;
     color: white;
     font-weight: bold;
+    display: inline-block;
 }
 .loginBlock a{
     color: inherit;
-    font-weight: bold;
 }
 
 .loginBlock img{
@@ -27,4 +28,15 @@
 .authTitle{
     display: flex;
     align-items: center;
+}
+.logoutButton {
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    background: none;
+    border: none;
+}
+.logoutButton:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
