@@ -1,10 +1,13 @@
 import React from 'react'
 import {Field, reduxForm} from "redux-form";
+import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
+
+import s from '../common/FormsControl/FormsControl.module.css';
 import {Input} from "../common/FormsControl/FormsControls";
 import {maxLengthCreator, minLengthCreator, required} from "../../utils/validators/validators";
-import {connect} from "react-redux";
 import {logIn, logOut} from "../../redux/authReducer";
-import {Redirect} from "react-router-dom";
+
 
 const maxLengthCreator35 = maxLengthCreator(35);
 const minLengthCreator4 = minLengthCreator(4)
@@ -22,8 +25,9 @@ export const LoginForm = (props) => {
     <div>
       <Field name="rememberMe" component="input" type="checkbox"/>Remember me
     </div>
+    {props.error && <div className={s.formSummaryError}>{props.error}</div>}
     <div>
-      <button type="submit" onClick={props.onSubmit}>Log in</button>
+      <button>Log in</button>
     </div>
   </form>
 }

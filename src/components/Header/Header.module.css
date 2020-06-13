@@ -40,3 +40,6 @@
     cursor: pointer;
     text-decoration: underline;
 }
+.logoutButton:focus{
+    outline: none;
+}

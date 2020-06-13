@@ -17,3 +17,8 @@
 .error textarea {
     border: 2px solid fuchsia;
 }
+.formSummaryError{
+    display: inline-block;
+    color: orangered;
+    padding: 5px;
+}
