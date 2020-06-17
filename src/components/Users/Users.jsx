@@ -1,56 +1,21 @@
 import React from "react";
 
-import {NavLink} from "react-router-dom";
-import s from './Users.module.css';
-import userPhoto from "../../assets/images/user.png"
+import {Paginator} from "../common/Paginator/Paginator";
+import {User} from "./User";
 
 
-let Users = (props) => {
-
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-  let pages = [];
-
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
-
+const Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, users, ...props}) => {
   return (<div>
-    <div>
-      {pages.map(p => {
-        return <span className={props.currentPage === p ? s.selectedPage : s.page} onClick={(e) => {
-          props.onPageChanged(p)
-        }}>{p}</span>
-      })}
-    </div>
-    {props.users.map(u => <div key={u.id}>
-      <span>
-        <div>
-          <NavLink to={'./profile/'+u.id}>
-          <img src={u.photos.small !== null ? u.photos.small : userPhoto} className={s.userPhoto}
-               alt="avatar"/>
-          </NavLink>
-          </div>
-
-        <div className={s.button}>
-          {u.followed
-            ? <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
-              props.unfollow(u.id)
-            }}>Unfollow</button>
-            : <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
-              props.follow(u.id)
-            }}>Follow</button>}
-        </div>
-      </span>
-      <span>
-        <div>{u.name}</div>
-        <div>{u.status}</div>
-      </span>
-      <span>
-        <div>{'u.location.country'}</div>
-        <div>{'u.location.city'}</div>
-      </span>
-    </div>)
-    }
+    <Paginator totalUsersCount={totalUsersCount}
+               pageSize={pageSize}
+               currentPage={currentPage}
+               onPageChanged={onPageChanged}/>
+    {users.map(u => <User user={u}
+                          key={u.id}
+                          followingInProgress={props.followingInProgress}
+                          unfollow={props.unfollow}
+                          follow={props.follow}/>
+    )}
   </div>)
 }
 

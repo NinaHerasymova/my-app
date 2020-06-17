@@ -3,17 +3,6 @@
     height: 200px;
 }
 
-.selectedPage {
-    font-weight: bold;
-    color: #FD8469;
-}
-.page{
-    padding: 5px;
-}
-.selectedPage:hover,
-.page:hover {
-    cursor: pointer;
-}
 .button button:hover {
     cursor: pointer;
 }

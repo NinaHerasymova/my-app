@@ -4,28 +4,19 @@ import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
 
 import s from '../common/FormsControl/FormsControl.module.css';
-import {Input} from "../common/FormsControl/FormsControls";
+import {createField, CreateField, Input} from "../common/FormsControl/FormsControls";
 import {maxLengthCreator, minLengthCreator, required} from "../../utils/validators/validators";
 import {logIn, logOut} from "../../redux/authReducer";
-
 
 const maxLengthCreator35 = maxLengthCreator(35);
 const minLengthCreator4 = minLengthCreator(4)
 
-export const LoginForm = (props) => {
-  return <form onSubmit={props.handleSubmit}>
-    <div>
-      <Field name="email" placeholder={"Login"} component={Input} type="text"
-             validate={[required, maxLengthCreator35, minLengthCreator4]}/>
-    </div>
-    <div>
-      <Field name="password" placeholder={"Password"} component={Input} type="password"
-             validate={[required, maxLengthCreator35, minLengthCreator4]}/>
-    </div>
-    <div>
-      <Field name="rememberMe" component="input" type="checkbox"/>Remember me
-    </div>
-    {props.error && <div className={s.formSummaryError}>{props.error}</div>}
+export const LoginForm = ({handleSubmit, error}) => {
+  return <form onSubmit={handleSubmit}>
+    {createField("email", "Login", Input,  [required, maxLengthCreator35, minLengthCreator4], {type: "text"})}
+    {createField("password", "Password", Input,  [required, maxLengthCreator35, minLengthCreator4], {type: "password"})}
+    {createField("rememberMe", "input", Input,  null, {type: "checkbox"}, "Remember me")}
+    {error && <div className={s.formSummaryError}>{error}</div>}
     <div>
       <button>Log in</button>
     </div>
@@ -36,13 +27,13 @@ const LoginReduxForm = reduxForm({
   form: 'login'
 })(LoginForm)
 
-const Login = (props) => {
+const Login = ({logIn, isAuth}) => {
 
   const onSubmit = (formData) => {
-    props.logIn(formData.email, formData.password, formData.rememberMe)
+    logIn(formData.email, formData.password, formData.rememberMe)
   }
 
-  if (props.isAuth) {
+  if (isAuth) {
     return <Redirect to="/profile"/>
   }
 
