@@ -1,12 +1,27 @@
+.selectedPage:hover,
+.pageNumber:hover {
+    cursor: pointer;
+}
+.paginator {
+    margin: 10px;
+}
+.pageNumber {
+    padding: 2px;
+}
 
-.selectedPage {
+.pageNumber.selectedPage {
     font-weight: bold;
     color: #FD8469;
 }
-.page{
-    padding: 5px;
-}
-.selectedPage:hover,
-.page:hover {
+.navigation:hover{
     cursor: pointer;
+}
+.navigation{
+    border: 2px solid #FD8469;
+    border-radius: 5px;
+    color: green;
+    background: white;
+    /*text-shadow: grey 1px 1px;*/
+    font-weight: bold;
+    outline: none;
 }

@@ -1,19 +1,13 @@
 import * as serviceWorker from './serviceWorker';
 import {store} from './redux/reduxStore';
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom'
 import ReactDOM from 'react-dom';
-import {Provider} from "react-redux";
 
 import './index.css';
-import App from './App';
+import {SamuraiJSApp} from "./App";
 
   ReactDOM.render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <App/>
-      </Provider>
-    </BrowserRouter>, document.getElementById('root'));
+    <SamuraiJSApp/>, document.getElementById('root'));
 
 window.store = store;
 
