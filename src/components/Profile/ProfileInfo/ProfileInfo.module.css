@@ -17,7 +17,7 @@
   font-size: 30px;
   font-weight: bold;
 }
-.personInform{
+.profileInform{
   padding: 15px;
 }
 .status{
@@ -27,4 +27,11 @@
 .avatar{
   display: flex;
   flex-direction: column;
+}
+.contactTitle:first-letter{
+  text-transform: uppercase;
+  padding-left: 20px;
+}
+.contact:first-letter{
+  text-transform: uppercase;
 }
