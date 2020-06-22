@@ -1,5 +1,5 @@
 import React, {Suspense} from 'react';
-import {BrowserRouter, Route, withRouter} from 'react-router-dom';
+import {BrowserRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {store} from "./redux/reduxStore";
@@ -19,9 +19,18 @@ const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsCo
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
 
 class App extends React.Component {
+  catchAllUnhandledErrors = (reason, promise) => {
+    alert("Error")
+    //disptch error
+  }
 
   componentDidMount() {
     this.props.initializeApp()
+    window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors)
   }
 
   render() {
@@ -33,16 +42,22 @@ class App extends React.Component {
         <HeaderContainer/>
         <Navbar/>
         <div className='app-wrapper-content'>
-          <Route path='/profile/:userId?'
-                 render={withSuspense(ProfileContainer)}/>
-          <Route path='/dialogs'
-                 render={withSuspense(DialogsContainer)}/>
-          <Route path='/users'
-                 render={() => <UsersContainer/>}/>
-          <Route path='/login'
-                 render={() => <Login/>}/>
-          <Route path='/music' component={Music}/>
-          <Route path='/news' component={News}/>
+          <Switch>
+            <Route exact path='/'
+                   render={() => <Redirect to={"/profile"}/>}/>
+            <Route path='/profile/:userId?'
+                   render={withSuspense(ProfileContainer)}/>
+            <Route path='/dialogs'
+                   render={withSuspense(DialogsContainer)}/>
+            <Route path='/users'
+                   render={() => <UsersContainer/>}/>
+            <Route path='/login'
+                   render={() => <Login/>}/>
+            <Route path='/music' component={Music}/>
+            <Route path='/news' component={News}/>
+            <Route path='*'
+                   render={() => <div>404 NOT FOUND</div>}/>
+          </Switch>
         </div>
       </div>
     );
