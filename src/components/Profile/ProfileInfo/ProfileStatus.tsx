@@ -1,14 +1,24 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './ProfileInfo.module.css';
 
-class ProfileStatus extends React.Component {
+type PropsType  ={
+  status: string
+  updateStatus: (status:string)=>void
+}
+
+type StateType  ={
+  editMode: boolean,
+  status: string
+}
+
+class ProfileStatus extends React.Component<PropsType, StateType> {
 
   state = {
     editMode: false,
     status: this.props.status
   }
 
-  onStatusChange=(e)=>{
+  onStatusChange=(e:ChangeEvent<HTMLInputElement>)=>{
     this.setState({
       status: e.currentTarget.value
     });
