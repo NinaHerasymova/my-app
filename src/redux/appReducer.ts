@@ -1,36 +1,34 @@
-import {getAuthUserData} from "./authReducer";
+import {getAuthUserData} from "./authReducer"
+import {InferActionsTypes} from "./reduxStore";
 
-const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
-
-export type InitialStateType = {
-  initialized: boolean
+let initialState = {
+    initialized: false
 }
 
-let initialState:InitialStateType = {
-  initialized: false
+export type InitialStateType = typeof initialState
+
+type ActionsType = InferActionsTypes<typeof actions>
+
+export const appReducer = (state = initialState, action: ActionsType): InitialStateType => {
+
+    switch (action.type) {
+        case 'samurai-network/app/INITIALIZED_SUCCESS':
+            return {
+                ...state,
+                initialized: true
+            };
+        default:
+            return state;
+    }
 }
 
-export const appReducer = (state = initialState, action: any):InitialStateType => {
-
-  switch (action.type) {
-    case INITIALIZED_SUCCESS:
-      return {
-        ...state,
-        initialized: true
-      };
-    default:
-      return state;
-  }
+export const actions  ={
+    initializedSuccess:()=>({type: 'samurai-network/app/INITIALIZED_SUCCESS' as const})
 }
 
-export type InitializedSuccessActionType = {
-  type: typeof INITIALIZED_SUCCESS
-}
+export const initializeApp = () => (dispatch:any) => {
+    let promise = dispatch(getAuthUserData());
 
-export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS})
-
-export const initializeApp = () => async(dispatch:any) => {
-  let promise = dispatch(getAuthUserData());
-  await Promise.all([promise])
-    dispatch(initializedSuccess())
+    Promise.all([promise])
+    dispatch(actions.initializedSuccess())
 }
